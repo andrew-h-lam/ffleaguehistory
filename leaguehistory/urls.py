@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^season$', views.season_index, name='season_index'),
 
     # /season/12/
-    #url(r'^season/(?P<season_id>[0-9]+)/$', views.season_detail, name='season_detail'),
+    url(r'^season/(?P<season_id>[0-9]+)/$', views.season_detail, name='season_detail'),
 
 ]
