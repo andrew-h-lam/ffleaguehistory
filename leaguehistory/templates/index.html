@@ -1,0 +1,15 @@
+<h1>The League History</h1>
+
+<ul>
+    <li>Season</li>
+    {% if all_season %}
+    <ul>
+        {% for season in all_season %}
+            <li><a href="/leaguehistory/season/{{ season.id }}/">{{ season.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3>Error</h3>
+    {% endif %}
+    <li><a href="player">Player</a></li>
+</ul>
