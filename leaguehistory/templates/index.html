@@ -11,5 +11,17 @@
     {% else %}
     <h3>Error</h3>
     {% endif %}
-    <li><a href="player">Player</a></li>
+
+
+    <li>Player</li>
+    {% if all_player %}
+
+    <ul>
+        {% for player in all_player %}
+            <li><a href="/leaguehistory/player/{{ player.id }}/">{{ player }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3>Error</h3>
+    {% endif %}
 </ul>

@@ -1,5 +1,14 @@
 Pages:
-- Season Info with records, buy-in, and payouts
-- Player Records by year with totals, finish, playoffs, matchups, winnings, etc.
+- Season
+    - standings/records
+    - payouts
+    - playoff brackets
+- Player
+    - records
+    - totals
+    - finish,
+    - playoffs
+    - matchups
+    - winnings
 - Rivalries/Matchups
 - Overall Winnings
