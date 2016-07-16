@@ -2,4 +2,15 @@
 
 <p>Buy-In: ${{ season.buy_in }}</p>
 
+<p>Payouts: </p>
+    <ul>
+    {% if payouts %}
+        {% for payout in payouts %}
+            <li>{{ payout.description }} - ${{ payout.amount }} </li>
+        {% endfor %}
+    {% else %}
+    <h3>Error</h3>
+    {% endif %}
+    </ul>
+
 <p>Standings</p>
