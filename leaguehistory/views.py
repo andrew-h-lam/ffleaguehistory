@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Season, Player, Matchup, Payout
 
@@ -39,9 +39,8 @@ def season_detail(request, season_id):
     except Season.DoesNotExist:
         raise Http404("Season does not exist")
 
-    payouts = Payout.objects.filter(season_id=season_id)
-
     players = Matchup.objects.order_by('home_team_id').values('home_team_id').distinct()
+    payouts = Payout.objects.select_related('player').filter(season_id=season_id)
 
     context = {
         'season': season,

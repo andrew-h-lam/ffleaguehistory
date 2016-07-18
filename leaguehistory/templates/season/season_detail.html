@@ -6,7 +6,7 @@
     <ul>
     {% if payouts %}
         {% for payout in payouts %}
-            <li>{{ payout.description }} - ${{ payout.amount }} </li>
+            <li>{{ payout.description }} - {{ payout.player.first_name }} {{ payout.player.last_name }} - ${{ payout.amount }} </li>
         {% endfor %}
     {% else %}
     <h3>Error</h3>
