@@ -9,8 +9,20 @@
             <li>{{ payout.description }} - {{ payout.player.first_name }} {{ payout.player.last_name }} - ${{ payout.amount }} </li>
         {% endfor %}
     {% else %}
-    <h3>Error</h3>
+        <h2>No Payout Information</h2>
     {% endif %}
     </ul>
 
-<p>Standings</p>
+<p>Standings: </p>
+    {% if standings %}
+        <table border="1">
+            <tr><td>Player</td><td>Wins</td><td>Losses</td><td>Ties</td></tr>
+        {% for record in standings %}
+            <tr><td>{{ record.player.first_name }} {{ record.player.last_name }}</td>
+                <td>{{ record.wins }}</td><td>{{ record.losses }}</td><td>{{ record.ties }}</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <h2>No Standings Information</h2>
+    {% endif %}

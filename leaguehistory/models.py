@@ -30,3 +30,10 @@ class Payout(models.Model):
     player = models.ForeignKey(Player)
     description = models.CharField(max_length=50)
     amount = models.IntegerField()
+
+class Standings(models.Model):
+    season = models.ForeignKey(Season)
+    player = models.ForeignKey(Player)
+    wins = models.IntegerField()
+    losses = models.IntegerField()
+    ties = models.IntegerField()

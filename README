@@ -1,12 +1,10 @@
 Pages:
 - Season
-    - standings/records
-    - payouts
     - playoff brackets
 - Player
     - records
     - totals
-    - finish,
+    - finish
     - playoffs
     - matchups
     - winnings
