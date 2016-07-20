@@ -1,17 +1,18 @@
-{{ season }}
+<h1>{{ season }}</h1>
 
 <p>Buy-In: ${{ season.buy_in }}</p>
 
 <p>Payouts: </p>
-    <ul>
     {% if payouts %}
+        <table border="1">
+
         {% for payout in payouts %}
-            <li>{{ payout.description }} - {{ payout.player.first_name }} {{ payout.player.last_name }} - ${{ payout.amount }} </li>
+            <tr><td>{{ payout.description }}</td><td>{{ payout.player.first_name }} {{ payout.player.last_name }}</td><td>${{ payout.amount }}</td>
         {% endfor %}
+        </table>
     {% else %}
         <h2>No Payout Information</h2>
     {% endif %}
-    </ul>
 
 <p>Standings: </p>
     {% if standings %}
