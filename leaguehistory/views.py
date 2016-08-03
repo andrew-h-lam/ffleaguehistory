@@ -1,6 +1,8 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from .models import Season, Player, Matchup, Payout, Standings
+from django.db.models import Sum
+
 
 def index(request):
     all_season = Season.objects.all()
@@ -17,10 +19,20 @@ def player_index(request):
     return render(request, 'player.html', context)
 
 def player_detail(request, player_id):
+
     try:
         player = Player.objects.get(id=player_id)
+        standings = Standings.objects.select_related('season').filter(player_id=player_id)
+        total_wins = Standings.objects.filter(player_id=player_id).aggregate(wins=Sum('wins'))
+        total_losses = Standings.objects.filter(player_id=player_id).aggregate(losses=Sum('losses'))
+        total_ties = Standings.objects.filter(player_id=player_id).aggregate(ties=Sum('ties'))
+
         context = {
             'player': player,
+            'standings': standings,
+            'total_wins': total_wins,
+            'total_losses': total_losses,
+            'total_ties': total_ties
         }
     except Player.DoesNotExist:
         raise Http404("Player does not exist")
@@ -29,6 +41,7 @@ def player_detail(request, player_id):
 
 def season_index(request):
     context = {
+
     }
     return render(request, 'season.html', context)
 

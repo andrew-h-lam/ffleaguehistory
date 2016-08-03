@@ -1,3 +1,22 @@
+<h1>Player Info</h1>
+
 {{player}}
 
-Player Info
+{% if standings %}
+<h4>Record By Season</h4>
+    <table border="1">
+        <tr><td>Season</td><td>Wins</td><td>Losses</td><td>Ties</td><td>Winnings</td></tr>
+        {% for record in standings %}
+            <tr>
+                <td>{{ record.season.name }}</td><td>{{ record.wins }}</td><td>{{ record.losses }}</td><td>{{ record.ties }}</td><td></td>
+            </tr>
+        {% endfor %}
+        <tr><td>TOTAL</td><td>{{ total_wins.wins }}</td><td>{{ total_losses.losses }}</td><td>{{ total_ties.ties }}</td><td></td></tr>
+    </table>
+{% else %}
+    <h2>No Record Information</h2>
+{% endif %}
+
+
+<!--Trophy Case-->
+
