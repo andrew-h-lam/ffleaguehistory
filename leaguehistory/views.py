@@ -1,6 +1,6 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from .models import Season, Player, Matchup, Payout, Standings
+from .models import Season, Player, Matchup, Payout, Record
 from django.db.models import Sum
 
 
@@ -22,10 +22,10 @@ def player_detail(request, player_id):
 
     try:
         player = Player.objects.get(id=player_id)
-        standings = Standings.objects.select_related('season').filter(player_id=player_id)
-        total_wins = Standings.objects.filter(player_id=player_id).aggregate(wins=Sum('wins'))
-        total_losses = Standings.objects.filter(player_id=player_id).aggregate(losses=Sum('losses'))
-        total_ties = Standings.objects.filter(player_id=player_id).aggregate(ties=Sum('ties'))
+        standings = Record.objects.select_related('season').filter(player_id=player_id)
+        total_wins = Record.objects.filter(player_id=player_id).aggregate(wins=Sum('wins'))
+        total_losses = Record.objects.filter(player_id=player_id).aggregate(losses=Sum('losses'))
+        total_ties = Record.objects.filter(player_id=player_id).aggregate(ties=Sum('ties'))
 
         context = {
             'player': player,
@@ -54,7 +54,7 @@ def season_detail(request, season_id):
 
     players = Matchup.objects.order_by('home_team_id').values('home_team_id').distinct()
     payouts = Payout.objects.select_related('player').filter(season_id=season_id)
-    standings = Standings.objects.select_related('player').filter(season_id=season_id)
+    standings = Record.objects.select_related('player').filter(season_id=season_id)
 
     context = {
         'season': season,

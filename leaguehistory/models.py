@@ -34,7 +34,7 @@ class Payout(models.Model):
     def __str__(self):
         return self.season.name + " - " + self.description
 
-class Standings(models.Model):
+class Record(models.Model):
     season = models.ForeignKey(Season)
     player = models.ForeignKey(Player)
     wins = models.IntegerField()
