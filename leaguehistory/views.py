@@ -1,8 +1,7 @@
 from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from .models import Season, Player, Matchup, Payout, Record
+from .models import Season, Player, Payout, Record
 from django.db.models import Sum
-
 
 def index(request):
     all_season = Season.objects.all()
@@ -52,13 +51,12 @@ def season_detail(request, season_id):
     except Season.DoesNotExist:
         raise Http404("Season does not exist")
 
-    players = Matchup.objects.order_by('home_team_id').values('home_team_id').distinct()
+    #players = Matchup.objects.order_by('home_team_id').values('home_team_id').distinct()
     payouts = Payout.objects.select_related('player').filter(season_id=season_id)
     standings = Record.objects.select_related('player').filter(season_id=season_id)
 
     context = {
         'season': season,
-        'players': players,
         'payouts': payouts,
         'standings': standings
     }

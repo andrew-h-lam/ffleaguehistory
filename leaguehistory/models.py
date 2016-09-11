@@ -18,12 +18,17 @@ class Season(models.Model):
 
 class Matchup(models.Model):
     season = models.ForeignKey(Season)
-    week_number =  models.IntegerField()
-    playoff_round = models.IntegerField()
-    home_team = models.ForeignKey(Player, related_name='home_team')
-    home_team_score = models.IntegerField()
-    away_team = models.ForeignKey(Player, related_name='away_team')
-    away_team_score = models.IntegerField()
+    week =  models.IntegerField()
+    playoff = models.IntegerField()
+    manager = models.ForeignKey(Player, related_name='manager')
+    score = models.IntegerField()
+    opponent = models.ForeignKey(Player, related_name='opponent')
+    opponent_score = models.IntegerField()
+    result = models.CharField(max_length=4)
+    at_home = models.BooleanField()
+
+    def __str__(self):
+         return self.player.first_name + " " + self.player.last_name + " vs. " + self.player.first_name + " " + self.player.last_name
 
 class Payout(models.Model):
     season = models.ForeignKey(Season)
@@ -43,3 +48,4 @@ class Record(models.Model):
 
     def __str__(self):
         return self.season.name + " - " + self.player.first_name + " " + self.player.last_name
+
